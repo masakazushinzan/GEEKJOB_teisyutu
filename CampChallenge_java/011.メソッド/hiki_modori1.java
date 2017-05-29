@@ -32,18 +32,22 @@ String[] mesoddo(int num){
     String[] prTA={"1","タナカ","1991/4/01","北海道"};
     String[] prKI={"2","キムラ","1991/3/01","東京"};
     String[] prSU={"3","スズキ","1991/9/02","大阪"};
-    String[] none={"","そのIDは存在しません"};
-    switch (num) {
-        case 1:
+    String[] none={"","そのIDは存在しません。<br>指定したID："+num};
+    int NUMT = Integer.parseInt(prTA[0]);
+    int NUMK = Integer.parseInt(prKI[0]);
+    int NUMS = Integer.parseInt(prSU[0]);
+    
+    if(num == NUMT){
             return prTA;
-        case 2:
+            }
+    else if (num == NUMK){
             return prKI;
-        case 3:
-            return prSU;
-        default:
-            break;
+    }
+    else if (num == NUMS){
+            return prSU;    
     }
     return none;
+    
 }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -51,7 +55,7 @@ String[] mesoddo(int num){
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String[] prof=mesoddo(2);
+            String[] prof=mesoddo(4);
             for (String value:prof){
             if(value == prof[0]){
             }
