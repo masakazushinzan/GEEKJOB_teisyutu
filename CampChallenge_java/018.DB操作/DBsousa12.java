@@ -40,31 +40,24 @@ public class DBsousa12 extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             db_con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Challenge_db", "root", "");
-            db_ins = db_con.prepareStatement("select* from profiles where name = ?");
+            db_ins = db_con.prepareStatement("select* from profiles where name = ? AND age= ? AND birthday = ?");
 
             if (request.getParameter("name") != null) {
                 int age = Integer.valueOf(request.getParameter("age"));
                 String name = request.getParameter("name");
                 String birth = request.getParameter("birthday");
-                db_ins.setString(1, name);//
+                db_ins.setString(1, name);
+                db_ins.setInt(2, age);
+                db_ins.setString(3, birth);
 
                 db_date = db_ins.executeQuery();
                 while (db_date.next()) {
-                    if (name.equals(db_date.getString("name"))) {
-                        if (age == db_date.getInt("age")) {
-                            if (birth.equals(db_date.getString("birthday"))) {
-                                out.println("ID:" + db_date.getString("profilesID") + "　　");
-                                out.println("名前:" + db_date.getString("name") + "　　");
-                                out.println("電話番号:" + db_date.getString("tell") + "　　");
-                                out.println("年齢:" + db_date.getString("age") + "　　");
-                                out.println("生年月日:" + db_date.getString("birthday") + "<br>");
-                            }
-                        }
-                    }
+                    out.println("ID:" + db_date.getString("profilesID") + "　　");
+                    out.println("名前:" + db_date.getString("name") + "　　");
+                    out.println("電話番号:" + db_date.getString("tell") + "　　");
+                    out.println("年齢:" + db_date.getString("age") + "　　");
+                    out.println("生年月日:" + db_date.getString("birthday") + "<br>");
                 }
-
-                //
-                //
             }
 
             db_date.close();
