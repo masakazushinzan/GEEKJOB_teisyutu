@@ -60,13 +60,13 @@ public class DBsousa12 extends HttpServlet {
                 }
             }
 
-            db_date.close();
             db_ins.close();
             db_con.close();
 
         } catch (SQLException e_sql) {
             System.out.print("接続時にエラーが発生しました：" + e_sql.toString());
         } catch (Exception e) {
+            System.out.print("例外的なエラーが発生しました：" + e.toString());
         } finally {
             if (db_con != null) {
                 try {
